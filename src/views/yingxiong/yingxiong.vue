@@ -1,9 +1,8 @@
 <template>
 	<div>
 		<h2 class="sub-header">英雄</h2>
-	
 		<router-link to="/yingxiong/add">
-				  <a class="btn btn-success">add</a>
+			<a class="btn btn-success">add</a>
 		</router-link>
 		<div class="table-responsive">
 			<table class="table table-striped">
@@ -21,7 +20,9 @@
 						<td>{{item.name}}</td>
 						<td>{{item.gender}}</td>
 						<td>
-							<a href="edit.html">edit</a> &nbsp;&nbsp;
+							<router-link :to="'/yingxiong/edit/'+ item.id">
+								edit
+							</router-link>
 							<a href="javascript:;" @click="delet(item.id)">delete</a>
 						</td>
 					</tr>
@@ -31,7 +32,6 @@
 				</tbody>
 			</table>
 		</div>
-	
 	</div>
 </template>
 <script>
@@ -49,10 +49,10 @@
 			loadData() {
 				console.log(this.list)
 				axios
-					.get('http://localhost:3002/heroes')
+					.get('http://localhost:3000/heroes')
 					.then((res) => {
 						if (res.status == 200) {
-							console.log(this)
+
 							this.list = res.data
 						}
 					})
@@ -66,10 +66,9 @@
 
 
 					axios
-						.delete('http://localhost:3002/heroes/' + id)
+						.delete('http://localhost:3000/heroes/' + id)
 						.then((res) => {
 							console.log(res)
-
 							if (res.status == 200) {
 								alert('删除成功')
 								this.loadData()
@@ -81,6 +80,10 @@
 				} else {
 					alert('取消删除')
 				}
+			},
+			edit(id) {
+
+
 			}
 		}
 	}

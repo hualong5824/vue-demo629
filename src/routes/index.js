@@ -6,6 +6,7 @@ import zhuangbei from '../views/zhuangbei/zhuangbei.vue'
 import wuqi from '../views/wuqi/wuqi.vue'
 
 import addIndex from '../views/yingxiong/add.vue'
+import edit from '../views/yingxiong/edit.vue'
 Vue.use(VueRouter)
 const router = new VueRouter({
 	linkActiveClass: 'active',
@@ -30,6 +31,11 @@ const router = new VueRouter({
 		{
 			path: '/yingxiong/add',
 			component: addIndex
+		},
+		{
+			path: '/yingxiong/edit/:id',
+			component: edit,
+			props:true
 		}
 	]
 })
