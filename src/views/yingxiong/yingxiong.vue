@@ -1,7 +1,10 @@
 <template>
 	<div>
 		<h2 class="sub-header">英雄</h2>
-		<a class="btn btn-success" href="add.html">Add</a>
+	
+		<router-link to="/yingxiong/add">
+				  <a class="btn btn-success">add</a>
+		</router-link>
 		<div class="table-responsive">
 			<table class="table table-striped">
 				<thead>
@@ -21,7 +24,6 @@
 							<a href="edit.html">edit</a> &nbsp;&nbsp;
 							<a href="javascript:;" @click="delet(item.id)">delete</a>
 						</td>
-						
 					</tr>
 					<tr>
 						<td colspan="4" v-if="list.length==0">暂无数据</td>
@@ -29,6 +31,7 @@
 				</tbody>
 			</table>
 		</div>
+	
 	</div>
 </template>
 <script>
@@ -36,8 +39,7 @@
 	export default {
 		data() {
 			return {
-				list: [
-				]
+				list: []
 			};
 		},
 		mounted() {
@@ -48,35 +50,35 @@
 				console.log(this.list)
 				axios
 					.get('http://localhost:3002/heroes')
-					.then((res)=>{
-							if (res.status == 200) {
+					.then((res) => {
+						if (res.status == 200) {
 							console.log(this)
 							this.list = res.data
 						}
 					})
-					.catch((err)=>{
-								console.log(err)
-						})
-					
-			},
-			delet(id){
-				if(confirm('你确定要删除吗?')){
-					
-					
-					axios
-					.delete('http://localhost:3002/heroes/'+id)
-					.then((res)=>{
-						console.log(res)
-						
-						if(res.status==200){
-							alert('删除成功')
-							this.loadData()
-						}
-					})
-					.catch((err)=>{
+					.catch((err) => {
 						console.log(err)
 					})
-				}else{
+
+			},
+			delet(id) {
+				if (confirm('你确定要删除吗?')) {
+
+
+					axios
+						.delete('http://localhost:3002/heroes/' + id)
+						.then((res) => {
+							console.log(res)
+
+							if (res.status == 200) {
+								alert('删除成功')
+								this.loadData()
+							}
+						})
+						.catch((err) => {
+							console.log(err)
+						})
+				} else {
 					alert('取消删除')
 				}
 			}
